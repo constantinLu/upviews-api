@@ -14,7 +14,6 @@ public class Api {
 
     public static final String TOKEN_EXPIRED_URL = PREFIX_URL + "/tokenExpired*";
 
-
     public static final String LOGIN_API = PREFIX_URL + "/login";
 
     public static final String SECTIONS_URL = PREFIX_URL + "/dashboard/sections";
