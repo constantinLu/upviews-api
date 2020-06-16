@@ -1,6 +1,5 @@
 package com.program.upviews.entity;
 
-import com.program.upviews.common.Payment;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,8 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "DEPOSIT_TRANSACTION")
-public class DepositTransactionEntity implements Serializable {
+@Table(name = "WALLET_TRANSACTION")
+public class WalletTransactionEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +25,8 @@ public class DepositTransactionEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private PaymentEntity payment;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private TransactionTypeEntity transactionType;
 
 }

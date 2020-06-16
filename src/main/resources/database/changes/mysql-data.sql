@@ -1,328 +1,146 @@
-#HRIS TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.HRIS (ID, FIRST_NAME, LAST_NAME, USER_NAME,  EMAIL, PHONE_NUMBER, BUSINESS_UNIT, UNIT, TECHNICAL_POSITION)
+#ROLE TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.role (ID, ROLE)
 VALUES
-(10, 'Gheorghe', 'Manzat', 'gmanzat', 'ghmanzat@fortech.ro', '0753212333', 'BU1', 'U1.4', 'Project Manager'),
-(40, 'Beatrice', 'Toma', 'btoma', 'toma@gmail.com', '077878788', 'BU1', 'U1.4', 'Back-End Developer'),
-(20, 'Cristina', 'Manolache', 'cmanolache', 'manolache@gmail.com', '0721332390', 'BU1', 'U1.4', 'Java Developer'),
-(30, 'Ionica', 'Vanzatoru', 'ivanzatoru', 'vanzatoru@gmail.com', '0741009234', 'BU1', 'U1.4', 'Java Developer');
+(1, 'ADMIN'),
+(2, 'USER');
 
-INSERT INTO E_RESUME.HRIS (ID, FIRST_NAME, LAST_NAME, USER_NAME,  EMAIL, PHONE_NUMBER, BUSINESS_UNIT, UNIT, TECHNICAL_POSITION, SUPERVISOR_ID)
+
+#ROLE TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.rank_ (ID, RANK_TYPE)
 VALUES
-(1, 'Florin', 'Tansanu', 'ftansanu', 'tansanu@fortech.ro', '0723211323', 'BU1', 'U1.4', 'Team Lead', 10),
-(2, 'Constantin', 'Lungu', 'clungu', 'lungu@fortech.ro', '0757212233', 'BU1', 'U1.4', 'Software Developer', 1),
-(3, 'Madalina', 'Magdalena', 'mmagdalena', 'magdalena@fortech.ro', '0759243332', 'BU1', 'U1.4', 'Java Developer', 1);
+(1, 'TESTER'),
+(2, 'MEMBER'),
+(3, 'RIDER'),
+(4, 'CHAMP'),
+(5, 'VIP'),
+(6, 'STAR'),
+(7, 'KING');
 
 
-
-#RESUME TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.RESUME (ID, USER_ID)
+#STATUS TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.status (ID, STATUS)
 VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 10);
+(1, 'STARTED'),
+(2, 'IN_PROGRESS'),
+(3, 'FINISHED');
 
 
-#EXPERIENCE TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.EXPERIENCE (ID, JOB_TITLE, COMPANY, LOCATION, START_DATE, END_DATE, RESPONSIBILITIES, RESUME_ID)
-VALUES (1, 'Software Team Lead', 'EA Games', 'Bucharest', STR_TO_DATE('01-02-2015', '%d-%m-%Y'),
-        STR_TO_DATE('01-10-2017', '%d-%m-%Y'),
-        '- Haxe development - a cross platform toolkit that targets all the mainstream platforms natively
-        - GAME development
-        - Driving multiple projects to completion
-        - Worked on distributed agile teams',
-        1),
-(2, 'Software Team Lead', 'Tesla', 'San Francisco', STR_TO_DATE('01-01-2018', '%d-%m-%Y'),
-        STR_TO_DATE('01-05-2018', '%d-%m-%Y'),
-        '- Ai development
-        - ECU development
-        - Documentation
-        - Worked on distributed agile teams',
-        1),
-(3, 'Software Developer', 'EOS Software', 'Stuttgart', STR_TO_DATE('01-02-2016', '%d-%m-%Y'),
-        STR_TO_DATE('01-07-2016', '%d-%m-%Y'), 'Providing second line technical support for more complex incidents received from the 1st line incident handlers;
-            - Acting as first point of escalation for the service desk;
-            - Active Directory Management – Computer, Users, Groups, Distribution
-            Lists;
-            - Network connectivity troubleshooting;
-            ▪ Remote Access User Management and troubleshooting;
-            ▪ Microsoft Office troubleshooting;
-            ▪ Windows XP, 7, 10 troubleshooting;',
-        2),
-(4, 'GIS Developer', 'ACADIS Software', 'Amsterdam', STR_TO_DATE('01-07-2016', '%d-%m-%Y'),
-        STR_TO_DATE('01-04-2018', '%d-%m-%Y'), 'Developing scripts to automate geoprocessing task with Python;
-    ▪ Gather, analyze, integrate spatial data and determine how best the
-    information can be displayed using GIS and tools based on python scripts;
-    ▪ Creating and processing data layers, shape files, tables or reports;
-    ▪ Manipulating data through SQL queries;
-    ▪ Doing all kinds of analysis for various type of studies such as environmental
-    impact assessment studies, environmental road traffic and industrial noise
-    and air quality surveys.',
-        2);
-
-
-#TRAINING TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.TRAINING (ISSUING_ORGANISATION, TRAINING_NAME, ISSUING_DATE, RESUME_ID) VALUES
-('Coursera', 'Java Object Oriented Programming', '2016-01-20', '1'),
-('Coursera', 'Beginning with Java', '2013-01-01', '1'),
-('Coursera', 'Introduction to Sql', '2014-01-01', '2'),
-('Udemy', 'Spring Boot Microservices', '2019-01-01', '2'),
-('Coursera', 'Python for Beginners', '2011-01-01', '1');
-
-
-#LANGUAGE TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.LANGUAGE (LANGUAGE_NAME)
+#PAYMENT TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.payment (ID, PAYMENT_TYPE)
 VALUES
-('English'),
-('French'),
-('Mandarin'),
-('Spanish'),
-('Arab'),
-('Russian'),
-('German'),
-('Japanese'),
-('Portuguese'),
-('Hindu'),
-('Hungarian'),
-('Ukrainian'),
-('Italian'),
-('Chinese'),
-('Greek'),
-('Polish'),
-('Serbian');
+(1, 'PAYPAL'),
+(2, 'CARD'),
+(3, 'CRYPTO');
 
 
-#LANGUAGE_SECTION TABLE---------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.LANGUAGE_SECTION (ID, LEVEL, READ_LEVEL, WRITE_LEVEL, SPEAK_LEVEL, LISTEN_LEVEL, LANGUAGE_ID, RESUME_ID) VALUES
-('1', 'BEGINNER', 'A1', 'A1', 'A1', 'A1', '1', '1'),
-('2', 'INTERMEDIARY', 'B1', 'B1', 'B1', 'B1', '2', '1'),
-('3', 'ADVANCED', 'B1', 'A1', 'B1', 'C1', '5', '2'),
-('4', 'ADVANCED', 'B1', 'C1', 'B1', 'C2', '4', '2');
-
-
-#ROLE TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.ROLE (ROLE_NAME)
+#CATEGORY TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.category (ID, CATEGORY)
 VALUES
-('Software Developer'),
-('Frontend Developer'),
-('Manager'),
-('Business Analyst'),
-('Scrum Master'),
-('Product Owner'),
-('Technical Lead'),
-('Tester');
+(1, 'YOUTUBE'),
+(2, 'FACEBOOK'),
+(3, 'TWITTER'),
+(4, 'INSTAGRAM'),
+(5, 'SOUNDCLOUD'),
+(6, 'TIKTOK');
 
 
-#TECHNOLOGY TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.TECHNOLOGY (ID, TECHNOLOGY_NAME)
+#USER TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.user (ID, USER_NAME, PASSWORD, ROLE_ID)
+VALUES (1, 'gizet', '$2a$10$Ej3wkupBtxoM..0/PgSVOu9173oETSJJOpQ/tdYqJFwh5fentNumK', 1);
+
+INSERT INTO up_views.user (ID, USER_NAME, PASSWORD, ROLE_ID)
+VALUES (2, 'cosmina', '$2a$10$Ej3wkupBtxoM..0/PgSVOu9173oETSJJOpQ/tdYqJFwh5fentNumK', 2);
+
+INSERT INTO up_views.user (ID, USER_NAME, PASSWORD, ROLE_ID)
+VALUES (5, 'misu', '$2a$10$Ej3wkupBtxoM..0/PgSVOu9173oETSJJOpQ/tdYqJFwh5fentNumK', 2);
+
+INSERT INTO up_views.user (ID, USER_NAME, PASSWORD, ROLE_ID)
+VALUES (6, 'gabitu', '$2a$10$Ej3wkupBtxoM..0/PgSVOu9173oETSJJOpQ/tdYqJFwh5fentNumK', 2);
+
+INSERT INTO up_views.user (ID, USER_NAME, PASSWORD, ROLE_ID)
+VALUES (7, 'twister', '$2a$10$Ej3wkupBtxoM..0/PgSVOu9173oETSJJOpQ/tdYqJFwh5fentNumK', 2);
+
+
+
+#ACCOUNT TABLE----------------------------------------------------------------------------
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, USER_ID, RANK_ID, CART_ID)
+VALUES (1, 'Gheorghe', 'Manzat', 'ghmanzat@fortech.ro', 'Nothing to say...');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (2, 'Florin', 'Tansanu', 'tansanu@fortech.ro', 'Me neither....');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (3, 'Constantin', 'Lungu', 'lungu@fortech.ro', 'Mi-e foame...');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (4, 'Madalina', 'Magdalena', 'magdalena@fortech.ro', 'I like IT.!');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (5, 'Cristina', 'Manolache', 'manolache@gmail.com', 'HR is my life.');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (6, 'Ionica', 'Vanzatoru', 'vanzatoru@gmail.com', 'Cumperi un pix?');
+
+INSERT INTO up_views.user_info (ID, FIRST_NAME, LAST_NAME, EMAIL, ABOUT_ME)
+VALUES (7, 'Beatrice', 'Toma', 'beatrice@gmail.com', 'Ma duc la yoga :))');
+
+
+
+
+#ORDER TABLE-----------------------------------------------------------------------------------------------------
+INSERT INTO upview.order_ (ID, ORDER_DATE, PRODUCT_ID, PAYMENT_ID, STATUS_ID)
 VALUES
-('1', 'JAVA 8'),
-('2', 'JAVA EE'),
-('3', 'SOAP WS'),
-('4', 'REST'),
-('5', 'JSF'),
-('6', 'GIT'),
-('7', 'REST WS'),
-('8', 'Spring Security'),
-('9', 'Spring Data'),
-('10', 'Spring Boot');
+(1,'2019-01-01  09:34:21' 1, 1, 3);
+(2,'2019-01-01  09:35:21' 3, 1, 3);
+(3,'2019-03-01  09:25:21' 4, 1, 3);
 
 
 
-#DATABASE TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.DB (ID, DB_NAME)
+#CART TABLE-----------------------------------------------------------------------------------------------------
+INSERT INTO upview.cart (ID, TYPE, CART_ORDER_DATE, ORDER_ID)
 VALUES
-('1', 'MySQL'),
-('2', 'OracleDB'),
-('3', 'Cassandra'),
-('4', 'MariaDB'),
-('5', 'PostgreSQL'),
-('6', 'SQL Server'),
-('7', 'REST WS'),
-('8', 'Redis'),
-('9', 'IBM DB2'),
-('10', 'MongoDB');
+(1, 'LOGGED', '2019-01-01  09:34:21', 1);
+(2, 'ANONYM', '2019-02-03  09:34:21', 3);
 
 
-#DEV_TOOL TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.DEV_TOOL (ID, DEV_TOOL_NAME)
+
+#PRODUCT TABLE-----------------------------------------------------------------------------------------------------
+INSERT INTO upview.product (ID, NAME, PRICE, AMOUNT, DISCOUNT, CATEGORY_ID, DESCRIPTION)
 VALUES
-('1', 'Intellj'),
-('2', 'Eclipse'),
-('3', 'Git'),
-('4', 'Maven'),
-('5', 'Svn'),
-('6', 'Vim'),
-('7', 'Gerrit'),
-('8', 'Notepad++'),
-('9', 'Jira'),
-('10', 'Workspace');
+(1, Youtube_views, 2.99, 500, 0, 1, 'Buy youtube views 2.99/500 views'),
+(2, Youtube_subscribers, 3.99, 50, 0, 1, 'Buy youtube subscribers 3.99/50 subscribers'),
+(3, Youtube_likes, 3.99, 50, 0, 1, 'Buy youtube likes 3.99/50 likes'),
+(4, Youtube_shares, 2.49, 500, 0, 1, 'Buy youtube shares 2.49/50 shares'),
+(5, Youtube_comments, 3.99, 10, 0, 1, 'Buy youtube comments 3.99/500 comments'),
+
+(6, TikTok_views, 1.39, 0, 6, 'Buy tiktok views 2.99/1000 views'),
+
+(7, Instagram_views, 2.99, 0, 4, 'Buy instagram likes 2.99/100 likes'),
+(8, Instagram_comments, 2.39, 0, 4, 'Buy instagram comments 2.39/10 comments'),
+
+(9, Facebook_comments, 3.99, 0, 2, 'Buy facebook comments 3.99/10 comments'),
+
+(10, Twitter_comments, 2.99, 0, 3, 'Buy twitter comments 2.99/10 comments'),
+
+(11, Soundcloud_plays, 1.99, 0, 5, 'Buy soundcloud plays 1.99/1000 plays'),
+(12, Soundcloud_followers, 3.59, 0, 5, 'Buy soundcloud followers 3.59/100 followers'),
+(13, Soundcloud_likes, 2.99, 0, 5, 'Buy soundcloud likes 2.99/100 likes'),
+(14, Soundcloud_reposts, 1.99, 0, 5, 'Buy soundcloud reposts 1.99/100 reposts'),
+(15, Soundcloud_downloads, 1.99, 0, 5, 'Buy soundcloud downloads 1.99/1000 downloads'),
+(16, Soundcloud_comments, 3.99, 0, 5, 'Buy soundcloud comments 3.99/10 comments');
 
 
-#TEST_TOOL TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.TEST_TOOL (ID, TEST_TOOL_NAME)
+#WALLET_TRANSACTION TABLE-----------------------------------------------------------------------------------------------------
+INSERT INTO upview.wallet_transaction (ID, AMOUNT, TRANSACTION_DATE, PAYMENT_ID, TRANSACTION_TYPE_ID)
 VALUES
-('1', 'Test Studio'),
-('2', 'Cucumber'),
-('3', 'Silk Test'),
-('4', 'Selenium'),
-('5', 'Appium'),
-('6', 'Jasmine'),
-('7', 'JTest'),
-('8', 'QF Test'),
-('9', 'Screenster'),
-('10', 'HP WinRunner');
+(1, '1000', '2018-12-121  11:25:21', 1, 1),
+(2, '2.99', '2019-02-03  09:34:21', 1, 1);
 
 
-#METHODOLOGY TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.METHODOLOGY (ID, METHODOLOGY_NAME)
+#WALLET TABLE-----------------------------------------------------------------------------------------------------
+INSERT INTO upview.wallet (ID, NAME, CURRENCY, BALANCE, ACCOUNT_ID)
 VALUES
-('1', 'Agile'),
-('2', 'Waterfall'),
-('3', 'Scrum'),
-('4', 'Kaban'),
-('5', 'Test-Driven Development'),
-('6', 'Extreme Programming'),
-('7', 'Prototype'),
-('8', 'Rapid Application Development'),
-('9', 'Dynamic System Development Model'),
-('10', 'Spiral Model');
-
-
-#OPERATION_SYSTEM TABLE--------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.OPERATION_SYSTEM (ID, OS_NAME)
-VALUES
-('1', 'Windows XP'),
-('2', 'Windows 7'),
-('3', 'Windows 8'),
-('4', 'Windows 10'),
-('5', 'Linux'),
-('6', 'MacOS'),
-('7', 'Kali'),
-('8', 'Ubuntu'),
-('9', 'Debian'),
-('10', 'Fedora');
-
-
-#EDUCATION TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.EDUCATION (ID, INSTITUTION, DEGREE, START_DATE, END_DATE, RESUME_ID)
-VALUES
-(1, 'CNRV', 'baccalaureate', STR_TO_DATE('01-09-2012', '%d-%m-%Y'), STR_TO_DATE('01-07-2016', '%d-%m-%Y'), 1),
-(2, 'UAIC', 'bachelor', STR_TO_DATE('01-09-2016', '%d-%m-%Y'), STR_TO_DATE('01-06-2019', '%d-%m-%Y'), 1),
-(3, 'CN', 'baccalaureate', STR_TO_DATE('01-09-2010', '%d-%m-%Y'), STR_TO_DATE('01-07-2014', '%d-%m-%Y'), 2),
-(4, 'UAIC', 'bachelor', STR_TO_DATE('01-10-2014', '%d-%m-%Y'), STR_TO_DATE('01-07-2017', '%d-%m-%Y'), 2),
-(5, 'Gheorghe Asachi Technical University', 'master', STR_TO_DATE('01-10-2017', '%d-%m-%Y'), STR_TO_DATE('01-07-2019', '%d-%m-%Y'), 2);
-
-
-#PROJECT TABLE-----------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROJECT (ID, NAME, DESCRIPTION, RESUME_ID)
-VALUES
-('1', 'UNITE', 'Dealership Application', '1'),
-('2', 'Diba', 'Mercedes-Benz User Manual', '2'),
-('3', 'Secur', 'Security login microservice', '1'),
-('4', 'Coca-Cola', 'Commercial App', '2'),
-('5', 'Audi', 'Configration App', '1');
-
-
-#PROFESSIONAL_SUMMARY TABLE-------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY (ID, SOFT_SKILL, RESUME_ID)
-VALUES
-('1', 'Fast-learner. Punctuality. Negotiation. Verbal communication', '1'),
-('2', 'Teamwork. Creativity. Flexibility. Integrity', '2');
-
-#PROJECT_ROLE TABLE------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROJECT_ROLE (PROJECT_ID, ROLE_ID)
-VALUES
-('1', '1'),
-('1', '7'),
-('2', '2'),
-('2', '1'),
-('2', '3'),
-('2', '4');
-
-
-#PROJECT_TECHNOLOGY TABLE------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROJECT_TECHNOLOGY (PROJECT_ID, TECHNOLOGY_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
+(1, 997.01, 1);
 
 
 
-#PROFESSIONAL_SUMMARY_DB TABLE--------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_DB (PROFESSIONAL_SUMMARY_ID, DB_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-#PROFESSIONAL_SUMMARY_DEV_TOOL TABLE--------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_DEV_TOOL (PROFESSIONAL_SUMMARY_ID, DEV_TOOL_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-
-#PROFESSIONAL_SUMMARY_TEST_TOOL TABLE--------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_TEST_TOOL (PROFESSIONAL_SUMMARY_ID, TEST_TOOL_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-
-#PROFESSIONAL_SUMMARY_METHODOLOGY TABLE--------------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_METHODOLOGY (PROFESSIONAL_SUMMARY_ID, METHODOLOGY_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-
-#PROFESSIONAL_SUMMARY_OPERATION_SYSTEM TABLE---------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_OPERATION_SYSTEM (PROFESSIONAL_SUMMARY_ID, OS_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-
-#PROFESSIONAL_SUMMARY_TECHNOLOGY TABLE---------------------------------------------------------------------------
-INSERT INTO E_RESUME.PROFESSIONAL_SUMMARY_TECHNOLOGY (PROFESSIONAL_SUMMARY_ID, TECHNOLOGY_ID)
-VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '10'),
-('1', '9');
-
-
-
-
-#CERTIFICATION TABLE-------------------------------------------------------------------------------------------------
-INSERT INTO E_RESUME.CERTIFICATION (ID, ISSUING_ORGANISATION, CERTIFICATE_NAME, ISSUE_DATE, EXPIRATION_DATE, RESUME_ID)
-VALUES
-(1, 'Microsoft', 'Microsoft Azure', STR_TO_DATE('01-09-2016', '%d-%m-%Y'), STR_TO_DATE('01-09-2025', '%d-%m-%Y'), 1),
-(2, 'Amazon', 'Aws Certified Developer', STR_TO_DATE('01-09-2016', '%d-%m-%Y'), STR_TO_DATE('01-09-2021', '%d-%m-%Y'), 1),
-(3, 'Oracle', 'OCP', STR_TO_DATE('01-02-2020', '%d-%m-%Y'), STR_TO_DATE('01-02-2030', '%d-%m-%Y'), 2),
-(4, 'Oracle', 'APEX', STR_TO_DATE('01-10-2014', '%d-%m-%Y'), STR_TO_DATE('01-10-2022', '%d-%m-%Y'), 2),
-(5, 'The Scrum Alliance', 'Scrum Alliance Certified Scrum Developer', STR_TO_DATE('01-10-2019', '%d-%m-%Y'), STR_TO_DATE('01-10-2023', '%d-%m-%Y'), 2);

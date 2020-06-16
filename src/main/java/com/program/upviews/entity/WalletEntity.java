@@ -2,6 +2,7 @@ package com.program.upviews.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 import javax.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,6 @@ public class WalletEntity implements Serializable {
     @OneToOne(fetch = FetchType.EAGER)
     private AccountEntity account;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private DepositTransactionEntity depositTransaction;
-
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WalletTransactionEntity> transactions;
 }
