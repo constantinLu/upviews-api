@@ -23,9 +23,6 @@ public class AccountEntity implements Serializable {
 
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private UserEntity user;
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private RoleEntity role;
 

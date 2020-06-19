@@ -29,7 +29,7 @@ public class UserEntity {
     @OneToOne(fetch = FetchType.EAGER)
     RoleEntity role;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AccountEntity account;
 
 }

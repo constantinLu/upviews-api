@@ -11,21 +11,21 @@ package com.program.upviews.security.filter;
         import org.springframework.security.web.AuthenticationEntryPoint;
         import org.springframework.stereotype.Component;
 
-@Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
-
-    private static final String CONTENT_TYPE = "application/json";
-
-    @Override
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-
-        InvalidLoginException response = new InvalidLoginException();
-        String jsonLoginResponse = new Gson().toJson(response);
-
-        httpServletResponse.setContentType(CONTENT_TYPE);
-        httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-        httpServletResponse.getWriter().print(jsonLoginResponse);
-
-    }
-}
+//@Component
+//public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+//
+//
+//    private static final String CONTENT_TYPE = "application/json";
+//
+//    @Override
+//    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+//
+//        InvalidLoginException response = new InvalidLoginException();
+//        String jsonLoginResponse = new Gson().toJson(response);
+//
+//        httpServletResponse.setContentType(CONTENT_TYPE);
+//        httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+//        httpServletResponse.getWriter().print(jsonLoginResponse);
+//
+//    }
+//}

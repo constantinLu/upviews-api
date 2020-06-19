@@ -5,7 +5,6 @@ import static com.program.upviews.common.Role.ADMIN;
 import com.program.upviews.configuration.swaggerdoc.AuthDocumentation;
 import com.program.upviews.security.filter.AuthenticationFilter;
 import com.program.upviews.security.filter.CrossOriginFilter;
-import com.program.upviews.security.filter.JwtAuthenticationEntryPoint;
 import com.program.upviews.security.filter.TokenVerifierFilter;
 import com.program.upviews.service.UserService;
 import static com.program.upviews.util.Api.*;
@@ -37,13 +36,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final PasswordConfiguration passwordConfiguration;
 
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    //private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    public SecurityConfiguration(UserService userService, JwtConfiguration jwtConfiguration, PasswordConfiguration passwordConfiguration, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public SecurityConfiguration(UserService userService, JwtConfiguration jwtConfiguration, PasswordConfiguration passwordConfiguration) {
         this.userService = userService;
         this.jwtConfiguration = jwtConfiguration;
         this.passwordConfiguration = passwordConfiguration;
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        //this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 
     @Override
@@ -51,8 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and()
+                //.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                //.and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()

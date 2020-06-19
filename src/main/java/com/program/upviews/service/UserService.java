@@ -21,10 +21,12 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.GrantedAuthority;
@@ -54,7 +56,7 @@ public class UserService implements UserDetailsService {
 
     private final String EMAIL_PATTERN = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 
-    Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
     public UserService(UserRepository userRepository, AccountRepository accountRepository, RoleRepository roleRepository,
                        ModelMapper modelMapper, PasswordConfiguration passwordConfiguration,
@@ -71,16 +73,18 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity userEntity = userRepository.findByUserName(username);
-        if (userEntity == null) {
+        Optional<UserEntity> userOptional = userRepository.findByUserName(username);
+        if (userOptional.isEmpty()) {
             throw new UserNotFoundException(username);
         }
         List<GrantedAuthority> roles = new ArrayList<>();
 
-        UserDto userDto = modelMapper.map(userEntity, UserDto.class);
-        RoleDto roleDto = modelMapper.map(userEntity.getRole(), RoleDto.class);
+        UserDto userDto = modelMapper.map(userOptional.get(), UserDto.class);
+        RoleDto roleDto = modelMapper.map(userOptional.get().getRole(), RoleDto.class);
         roles.add(new SimpleGrantedAuthority(roleDto.getRole().toString()));
         return new User(userDto.getUserName(), userDto.getPassword(), roles);
+
+
     }
 
 
@@ -95,12 +99,12 @@ public class UserService implements UserDetailsService {
 
     public void changePassword(String username, ChangePasswordRequest request) {
 
-        UserEntity userEntity = userRepository.findByUserName(username);
-        if (userEntity == null) {
+        Optional<UserEntity> userOptional = userRepository.findByUserName(username);
+        if (userOptional.isEmpty()) {
             throw new UserNotFoundException(username);
         }
 
-        if (!passwordConfiguration.verifyHash(request.getPassword(), userEntity.getPassword())) {
+        if (!passwordConfiguration.verifyHash(request.getPassword(), userOptional.get().getPassword())) {
             throw new InvalidPasswordException(username);
         }
 
@@ -123,15 +127,15 @@ public class UserService implements UserDetailsService {
     public void forgotPassword(String email) {
 
         String finalEmail = extractEmailAddress(email);
-        AccountEntity userInfoEntity = accountRepository.findByEmail(finalEmail);
-        UserEntity userEntity = userRepository.findUserEntityByAccountEmail(userInfoEntity.getEmail());
+        Optional<AccountEntity> userInfoOptional = accountRepository.findByEmail(finalEmail);
+        Optional<UserEntity> userEntity = userRepository.findUserEntityByAccountEmail(userInfoOptional.get().getEmail());
 
-        if (userEntity != null) {
-            userEntity.setResetToken(createUserResetToken());
-            userEntity.setTokenExpiration(Timestamp.valueOf((LocalDateTime.now()).plusMinutes(forgotPasswordTokenConfiguration.getTokenExpirationTime())));
-            save(userEntity);
-            String token = userEntity.getResetToken();
-            SimpleMailMessage mailMessage = getSimpleMailMessage(userEntity, token);
+        if (userEntity.isPresent()) {
+            userEntity.get().setResetToken(createUserResetToken());
+            userEntity.get().setTokenExpiration(Timestamp.valueOf((LocalDateTime.now()).plusMinutes(forgotPasswordTokenConfiguration.getTokenExpirationTime())));
+            save(userEntity.get());
+            String token = userEntity.get().getResetToken();
+            SimpleMailMessage mailMessage = getSimpleMailMessage(userEntity.get(), token);
             emailService.sendEmail(mailMessage);
         } else {
             throw new InvalidEmailException(String.format("Email %s", finalEmail));
@@ -142,8 +146,8 @@ public class UserService implements UserDetailsService {
         boolean tokenExists = true;
         String token = UUID.randomUUID().toString();
         while (tokenExists) {
-            UserEntity userEntity = userRepository.findByResetToken(token);
-            if (userEntity == null) {
+            Optional<UserEntity> userEntity = userRepository.findByResetToken(token);
+            if (userEntity.isEmpty()) {
                 tokenExists = false;
             } else {
                 token = UUID.randomUUID().toString();
@@ -181,16 +185,16 @@ public class UserService implements UserDetailsService {
 
     public void resetUserPassword(String token, ResetPasswordRequest request) {
 
-        UserEntity userEntity = userRepository.findByResetToken(token);
+        Optional<UserEntity> userEntity = userRepository.findByResetToken(token);
 
-        if (userEntity != null) {
-            if (DateUtil.isDateInThePast(userEntity.getTokenExpiration())) {
+        if (userEntity.isPresent()) {
+            if (DateUtil.isDateInThePast(userEntity.get().getTokenExpiration())) {
                 throw new RuntimeException("Reset password token is expired");
             }
             if (request.getNewPassword().equals(request.getReTypeNewPassword())) {
-                userEntity.setResetToken(null);
-                userEntity.setPassword(passwordConfiguration.hash(request.getNewPassword()));
-                save(userEntity);
+                userEntity.get().setResetToken(null);
+                userEntity.get().setPassword(passwordConfiguration.hash(request.getNewPassword()));
+                save(userEntity.get());
                 UserDto userDto = modelMapper.map(userEntity, UserDto.class);
                 resetPassword(userDto);
             } else {
@@ -203,9 +207,9 @@ public class UserService implements UserDetailsService {
     }
 
     public Boolean isResetPasswordTokenExpired(String token) {
-        UserEntity userEntity = userRepository.findByResetToken(token);
+        Optional<UserEntity> userEntity = userRepository.findByResetToken(token);
         if (userEntity != null) {
-            Timestamp tokenExpirationTime = userEntity.getTokenExpiration();
+            Timestamp tokenExpirationTime = userEntity.get().getTokenExpiration();
             return DateUtil.isDateInThePast(tokenExpirationTime);
         } else {
             throw new RuntimeException("Given token does not exist");
@@ -228,15 +232,15 @@ public class UserService implements UserDetailsService {
             throw new InvalidEmailException(String.format("Email %s", request.getEmail()));
         }
 
-        UserEntity user = userRepository.findByUserName(request.getUsername());
+        Optional<UserEntity> user = userRepository.findByUserName(request.getUsername());
 
-        if (user != null) {
+        if (user.isPresent()) {
             throw new UsernameAlreadyExistsException(String.format("UserName %s", request.getUsername()));
         }
 
-        AccountEntity userAccount = accountRepository.findByEmail(request.getEmail());
+        Optional<AccountEntity> userAccount = accountRepository.findByEmail(request.getEmail());
 
-        if (userAccount != null) {
+        if (userAccount.isPresent()) {
             throw new EmailAlreadyExistsException(String.format("Email: %s", request.getEmail()));
         }
 
