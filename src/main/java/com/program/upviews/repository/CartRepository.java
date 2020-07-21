@@ -10,7 +10,7 @@ public interface CartRepository extends CrudRepository<CartEntity, Long> {
 //    @Transactional
 //    @Modifying
 //    @Query("UPDATE CertificationEntity c SET c.issuingOrganisation=:issuingOrganisation, c.certificateName=:certificateName, " +
-//            "c.issueDate=:issueDate, c.expirationDate=:expirationDate WHERE c.id =:certificationId AND c.resumeEntity.id=:resumeId")
+//            "c.issueDate=:issueDate, c.expirationDate=:expirationDate WHERE c.clientId =:certificationId AND c.resumeEntity.clientId=:resumeId")
 //    int updateCertification(@Param("issuingOrganisation") String issuingOrganisation,
 //                            @Param("certificateName") String certificateName,
 //                            @Param("issueDate") LocalDate issueDate,
