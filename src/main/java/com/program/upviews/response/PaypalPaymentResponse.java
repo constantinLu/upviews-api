@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentResponse {
+public class PaypalPaymentResponse {
 
     String redirectUrl;
 }

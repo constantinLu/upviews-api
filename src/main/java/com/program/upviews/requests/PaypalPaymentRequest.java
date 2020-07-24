@@ -3,12 +3,11 @@ package com.program.upviews.requests;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentRequest {
+public class PaypalPaymentRequest {
 
     private double price;
     private String currency;

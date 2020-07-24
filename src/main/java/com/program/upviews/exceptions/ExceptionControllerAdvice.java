@@ -52,4 +52,10 @@ public class ExceptionControllerAdvice {
         log.error(e.getMessage());
         return response.create(e, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(PayPalException.class)
+    public ResponseEntity handleException(final PayPalException e) {
+        log.error(e.getMessage());
+        return response.create(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
