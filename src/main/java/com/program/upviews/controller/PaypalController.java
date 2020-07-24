@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
-//FIXME: THIS FOR TESTING PURPOSES / WILL BE MODIFIED FOR OUR FROND END IN THE FUTURE.
+//FIXME: THIS FOR TESTING PURPOSES / WILL BE MODIFIED FOR OUR FRONT END IN THE FUTURE.
 @RestController
 @CrossOrigin
 @RequestMapping(PREFIX_URL)
@@ -33,7 +33,7 @@ public class PaypalController {
             @ApiResponse(code = 403, message = "Not authorized to save project"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
-    @PostMapping("/pay")
+    @PostMapping("/payment")
     public PaypalPaymentResponse processPayment(@RequestBody PaypalPaymentRequest request) {
         return new PaypalPaymentResponse(
                 paypalService.processPayment(request.getPrice(), request.getCurrency(), request.getMethod(),
