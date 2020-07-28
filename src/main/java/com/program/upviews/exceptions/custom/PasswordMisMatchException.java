@@ -2,9 +2,9 @@ package com.program.upviews.exceptions.custom;
 
 public class PasswordMisMatchException extends RuntimeException {
 
-    private static final String  message = "New password is not matching for current user: ";
+    private static final String  MESSAGE = "New password is not matching for current user: ";
 
     public PasswordMisMatchException(String msg) {
-        super(message + msg);
+        super(MESSAGE + msg);
     }
 }

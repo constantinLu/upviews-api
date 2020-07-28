@@ -261,7 +261,7 @@
 //        List<RoleDto> roleDtos = newArrayList();
 //        project.getRoles().forEach(role -> {
 //            RoleDto roleDto = modelMapper.map(role, RoleDto.class);
-//            roleDto.setId(encryptUtil.encrypt(role.getId()));
+//            roleDto.setClientId(encryptUtil.encrypt(role.getClientId()));
 //            roleDtos.add(roleDto);
 //        });
 //        return roleDtos;
@@ -276,7 +276,7 @@
 //        List<DatabaseDto> databaseDtos = newArrayList();
 //        professionalSummary.getDatabases().forEach(database -> {
 //            DatabaseDto databaseDto = modelMapper.map(database, DatabaseDto.class);
-//            databaseDto.setId(encryptUtil.encrypt(database.getId()));
+//            databaseDto.setClientId(encryptUtil.encrypt(database.getClientId()));
 //            databaseDtos.add(databaseDto);
 //        });
 //        return databaseDtos;
@@ -291,7 +291,7 @@
 //        List<DevToolDto> databaseDtos = newArrayList();
 //        professionalSummary.getDevTools().forEach(devTool -> {
 //            DevToolDto devToolDto = modelMapper.map(devTool, DevToolDto.class);
-//            devToolDto.setId(encryptUtil.encrypt(devTool.getId()));
+//            devToolDto.setClientId(encryptUtil.encrypt(devTool.getClientId()));
 //            databaseDtos.add(devToolDto);
 //        });
 //        return databaseDtos;
@@ -306,7 +306,7 @@
 //        List<TestToolDto> testToolDtos = newArrayList();
 //        professionalSummary.getTestTools().forEach(testTool -> {
 //            TestToolDto testToolDto = modelMapper.map(testTool, TestToolDto.class);
-//            testToolDto.setId(encryptUtil.encrypt(testTool.getId()));
+//            testToolDto.setClientId(encryptUtil.encrypt(testTool.getClientId()));
 //            testToolDtos.add(testToolDto);
 //        });
 //        return testToolDtos;
@@ -321,7 +321,7 @@
 //        List<MethodologyDto> methodologiesDtos = newArrayList();
 //        professionalSummary.getMethodologies().forEach(methodology -> {
 //            MethodologyDto methodologyDto = modelMapper.map(methodology, MethodologyDto.class);
-//            methodologyDto.setId(encryptUtil.encrypt(methodology.getId()));
+//            methodologyDto.setClientId(encryptUtil.encrypt(methodology.getClientId()));
 //            methodologiesDtos.add(methodologyDto);
 //        });
 //        return methodologiesDtos;
@@ -336,7 +336,7 @@
 //        List<OperationSystemDto> osDtos = newArrayList();
 //        professionalSummary.getOperationSystems().forEach(os -> {
 //            OperationSystemDto osDto = modelMapper.map(os, OperationSystemDto.class);
-//            osDto.setId(encryptUtil.encrypt(os.getId()));
+//            osDto.setClientId(encryptUtil.encrypt(os.getClientId()));
 //            osDtos.add(osDto);
 //        });
 //        return osDtos;
@@ -351,7 +351,7 @@
 //        List<TechnologyDto> technologyDtos = newArrayList();
 //        professionalSummary.getTechnologies().forEach(technology -> {
 //            TechnologyDto technologyDto = modelMapper.map(technology, TechnologyDto.class);
-//            technologyDto.setId(encryptUtil.encrypt(technology.getId()));
+//            technologyDto.setClientId(encryptUtil.encrypt(technology.getClientId()));
 //            technologyDtos.add(technologyDto);
 //        });
 //        return technologyDtos;
@@ -366,7 +366,7 @@
 //        List<TechnologyDto> technologyDtos = newArrayList();
 //        project.getTechnologies().forEach(technology -> {
 //            TechnologyDto technologyDto = modelMapper.map(technology, TechnologyDto.class);
-//            technologyDto.setId(encryptUtil.encrypt(technology.getId()));
+//            technologyDto.setClientId(encryptUtil.encrypt(technology.getClientId()));
 //            technologyDtos.add(technologyDto);
 //        });
 //        return technologyDtos;

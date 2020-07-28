@@ -30,6 +30,7 @@ public class DateUtil {
 
     /**
      * Checks if the date-time given as parameter is in the past
+     *
      * @param time The given date-time
      * @return true if that date-time is in the past
      */

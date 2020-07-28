@@ -44,10 +44,10 @@ public class SwaggerConfiguration {
 
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("Fortech Secur", "https://github.com/gizet/secur-auth", "fortechSecur@gmail.com");
+        Contact contact = new Contact("upView", "TBD", "");
         return new ApiInfoBuilder()
-                .title("Secur App REST API")
-                .description("List of available API served by secur App")
+                .title("upView REST API")
+                .description("List of available API served by upView App")
                 .version("1.0")
                 .license("None")
                 .licenseUrl("")
