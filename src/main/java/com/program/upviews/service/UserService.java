@@ -172,7 +172,7 @@ public class UserService implements UserDetailsService {
         StringBuilder emailBody = new StringBuilder();
         //TODO: Get frontend URL from eureka
         emailBody.append("To reset your password, click the link below:\n")
-                .append("http://localhost:59495/")
+                .append("http://localhost:8091/")
                 .append("resetPassword?token=")
                 .append(token)
                 .append("\n")
