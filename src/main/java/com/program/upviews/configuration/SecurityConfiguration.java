@@ -11,6 +11,7 @@ import static com.program.upviews.util.Api.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.BeanIds;
@@ -28,6 +29,7 @@ import springfox.documentation.spring.web.scanners.ApiModelReader;
 
 @Configuration
 @EnableWebSecurity
+@Profile("!local")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
@@ -56,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(USERS_URL).hasAuthority(ADMIN.name())
-                .antMatchers(RESET_PASSWORD_URL, FORGOT_PASSWORD_URL, TOKEN_EXPIRED_URL).permitAll()
+                .antMatchers(RESET_PASSWORD_URL, FORGOT_PASSWORD_URL, TOKEN_EXPIRED_URL, PRODUCTS_URL).permitAll()
                 .and()
                 .addFilterBefore(new CrossOriginFilter(), AuthenticationFilter.class)
                 .addFilter(new AuthenticationFilter(authenticationManager(), jwtConfiguration))
